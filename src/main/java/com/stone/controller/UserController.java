@@ -1,5 +1,8 @@
 package com.stone.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stone.entity.ResultInfo;
 import com.stone.entity.User;
 import com.stone.service.IUserService;
+
 
 @RestController
 public class UserController {
@@ -43,5 +47,25 @@ public class UserController {
 //		log.info("resultInfo: "+resultInfo);
 		return resultInfo;
 	}
+	
+	@RequestMapping(value="/user/testList",method=RequestMethod.POST)
+	@ResponseBody
+	public Object getList(){
+		
+		List<String> list1 = new ArrayList<>();
+		list1.add("afda");
+		list1.add("fbie");
+		List<Integer> list2 = new ArrayList<>();
+		list2.add(1122);
+		list2.add(4054);
+		List<Object> listAll=new ArrayList<>();
+		listAll.add(list1);
+		listAll.add(list2);
+		resultInfo = new ResultInfo();
+		resultInfo.setData(listAll);
+		return resultInfo;
+	}
+	
+	
 
 }
