@@ -3,6 +3,8 @@ package com.stone.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +66,21 @@ public class UserController {
 		resultInfo = new ResultInfo();
 		resultInfo.setData(listAll);
 		return resultInfo;
+	}
+	
+	/*@RequestMapping(value="/user/testUeditor",method=RequestMethod.GET)
+	@ResponseBody
+	public void testUeditor(@RequestParam(value="editorValue") byte[] blob){
+		
+		System.out.println(blob);
+		
+	}*/
+	@RequestMapping(value="/user/testUeditor",method=RequestMethod.POST)
+	@ResponseBody
+	public void testUeditor(HttpServletRequest request){
+		String blob = request.getParameter("myValue");
+		System.out.println(blob);
+		
 	}
 	
 	
