@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mysql.jdbc.Blob;
 import com.stone.entity.ResultInfo;
+import com.stone.entity.SystemMsg;
 import com.stone.entity.User;
+import com.stone.service.IMessageService;
 import com.stone.service.IUserService;
 
 
@@ -75,14 +78,35 @@ public class UserController {
 		System.out.println(blob);
 		
 	}*/
+	
+	
+	@Autowired
+	private IMessageService messageServiceImpl;
+	/**
+	 * ueditor后台接受数据测试
+	 * @author stone
+	 * @param request
+	 */
 	@RequestMapping(value="/user/testUeditor",method=RequestMethod.POST)
 	@ResponseBody
-	public void testUeditor(HttpServletRequest request){
-		String blob = request.getParameter("myValue");
-		System.out.println(blob);
+	public String testUeditor(HttpServletRequest request){
 		
+		String blob = request.getParameter("myValue");
+		if(blob!=null || blob.length()>0){
+			SystemMsg systemMsg = new SystemMsg();
+			systemMsg.setSystemMsgId("3434dsfa");
+			systemMsg.setAlls(blob);
+			System.out.println(blob);
+			//将数据把保存到数据库中
+			messageServiceImpl.saveSystemMsg(systemMsg);
+			return "上传成功";
+		}else{
+			return "上传失败";
+		}
 	}
-	
-	
-
 }
+
+
+
+
+

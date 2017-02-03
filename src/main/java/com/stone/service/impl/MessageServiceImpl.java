@@ -1,37 +1,36 @@
 package com.stone.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stone.entity.SystemMsg;
-import com.stone.entity.UserSystemMsg;
+import com.stone.repository.SystemMsgRepository;
+//import com.stone.repository.SystemMsgRepository;
 import com.stone.service.IMessageService;
 
 @Service
 public class MessageServiceImpl implements IMessageService {
 
+
+	@Autowired
+	private SystemMsgRepository systemMsgRepository;
+	
 	/**
-	 * 获取
+	 * 获取系统消息
 	 */
 	@Override
-	public UserSystemMsg getUserSystemMsg(String uid) {
-		return null;
+	public SystemMsg getSystemMsg(String systemMsgId) {
+		SystemMsg systemMsg = systemMsgRepository.findOne(systemMsgId);
+		return systemMsg;
 	}
 
-	@Override
-	public void saveUserSystemMsg(UserSystemMsg userSystemMsg) {
-		
-	}
-
-	@Override
-	public System getSystemMsg(String systemMsgId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	/**
+	 * 保存系统信息
+	 */
 	@Override
 	public void saveSystemMsg(SystemMsg systemMsg) {
-		// TODO Auto-generated method stub
-		
+		systemMsgRepository.save(systemMsg);
 	}
+
 
 }
